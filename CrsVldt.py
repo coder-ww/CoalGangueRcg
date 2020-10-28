@@ -12,7 +12,7 @@ import SupVecMech as mysvm
 def Visualize(num):  # 可以尝试在柱状图上带数据
     x = range(6)
     plt.xlim(-1, 6)
-    plt.ylim(0, 1)
+    plt.ylim(0.5, 1)
     plt.xticks(range(6), np.linspace(0, 6, 6, dtype=int))
     plt.ylabel("Precision")
     plt.xlabel("Group No.")
@@ -25,10 +25,10 @@ def Visualize(num):  # 可以尝试在柱状图上带数据
 def GenSet(times, iteration):
     print("分组:" + str(times))
 
-    coal_prefix = 'D:\\418_2\\coal\\'
-    gangue_prefix = 'D:\\418_2\\gangue\\'
-    coal_num = 199
-    gangue_num = 199
+    coal_prefix = 'D:\\coal-gangue\\selected\\coal\\'
+    gangue_prefix = 'D:\\coal-gangue\\selected\\gangue\\'
+    coal_num = 184
+    gangue_num = 182
 
     suffix = '.jpg'
     train = []
@@ -39,7 +39,7 @@ def GenSet(times, iteration):
         img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
         img = pp.prep(img)
         # 这里使用了区域关系重采样做插值
-        img = cv2.resize(img, (150, 150), interpolation=cv2.INTER_AREA)
+        #img = cv2.resize(img, (150, 150), interpolation=cv2.INTER_AREA)
         if i % iteration != times:
             train.append(fe.Rotation_invariant_LBP(img))
             label.append("coal")
@@ -54,7 +54,7 @@ def GenSet(times, iteration):
         img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
         img = pp.prep(img)
         # 这里使用了区域关系重采样做插值
-        img = cv2.resize(img, (150, 150), interpolation=cv2.INTER_AREA)
+        #img = cv2.resize(img, (150, 150), interpolation=cv2.INTER_AREA)
         if i % iteration != times:
             train.append(fe.Rotation_invariant_LBP(img))
             label.append("gangue")

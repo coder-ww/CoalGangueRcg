@@ -25,6 +25,8 @@ def Hog(img):
 # LBP圆形特征，具有旋转不变性
 def Rotation_invariant_LBP(img, radius=3, neighbors=8):
     h, w = img.shape
+    img = img[int(h/4):int(3*h/4), int(w/4):int(3*w/4)]
+    h, w = img.shape
     dst = np.zeros((h - 2 * radius, w - 2 * radius), dtype=img.dtype)
     for k in range(neighbors):
         # 计算采样点对于中心点坐标的偏移量rx，ry
@@ -49,21 +51,23 @@ def Rotation_invariant_LBP(img, radius=3, neighbors=8):
                 # 获得中心像素点的灰度值
                 center = img[i, j]
                 # 根据双线性插值公式计算第k个采样点的灰度值
-                neighbor = img[i + y1, j + x1] * w1 + img[i + y2, j + x1] * w2 + img[i + y1, j + x2] * w3 + img[
-                    i + y2, j + x2] * w4
+                neighbor = img[i + y1, j + x1] * w1 + img[i + y2, j + x1] * w2 + img[i + y1, j + x2] * w3 + img[i + y2, j + x2] * w4
                 # LBP特征图像的每个邻居的LBP值累加，累加通过与操作完成，对应的LBP值通过移位取得
                 dst[i - radius, j - radius] |= (neighbor > center) << (np.uint8)(neighbors - k - 1)
     # 进行旋转不变处理
-    for i in range(dst.shape[0]):
-        for j in range(dst.shape[1]):
-            currentValue = dst[i, j]
-            minValue = currentValue
-            for k in range(1, neighbors):
-                # 循环左移
-                tmp = (np.uint8)(currentValue >> (neighbors - k)) | (np.uint8)(currentValue << k)
-                if tmp < minValue:
-                    minValue = tmp
-            dst[i, j] = minValue
+    # for i in range(dst.shape[0]):
+    #     for j in range(dst.shape[1]):
+    #         currentValue = dst[i, j]
+    #         minValue = currentValue
+    #         for k in range(1, neighbors):
+    #             # 循环左移
+    #             tmp = (np.uint8)(currentValue >> (neighbors - k)) | (np.uint8)(currentValue << k)
+    #             if tmp < minValue:
+    #                 minValue = tmp
+    #         dst[i, j] = minValue
     hist, bins = np.histogram(dst, 256, range=(0, 256))
+    #计算概率归一化的直方图特征
+    for item in hist:
+        item = item/hist.size
 
     return hist

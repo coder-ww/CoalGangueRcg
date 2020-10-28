@@ -5,8 +5,8 @@ import cv2
 def GenDataset():
     cnt_s = 0
     cnt_c = 0
-    dir = "D:\\BaiduNetdiskDownload\\second\\"
-    for i in range(235):
+    dir = "D:\\BaiduNetdiskDownload\\raw\\"
+    for i in range(328):
         path_xml = dir + str(i) + '.xml'
         path_img = dir + str(i) + '.jpg'
         img = cv2.imread(path_img)
@@ -27,10 +27,10 @@ def GenDataset():
             maxy = int(ymax.childNodes[0].data)
             img_clip = img[miny:maxy, minx:maxx]
             if name.childNodes[0].data == "coal":
-                cv2.imwrite("D:\\418_2\\coal\\"+str(cnt_c)+".jpg",img_clip)
+                cv2.imwrite("D:\\418\\coal\\"+str(cnt_c)+".jpg",img_clip)
                 cnt_c += 1
             else:
-                cv2.imwrite("D:\\418_2\\gangue\\"+str(cnt_s)+".jpg",img_clip)
+                cv2.imwrite("D:\\418\\gangue\\"+str(cnt_s)+".jpg",img_clip)
                 cnt_s += 1
 
-#GenDataset()
+GenDataset()
