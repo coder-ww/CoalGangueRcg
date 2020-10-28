@@ -1,0 +1,15 @@
+import numpy
+import cv2
+import time
+import FeatExtraction as fe
+
+print("helloworld")
+path = r'D:\418_2\coal\6.jpg'
+img = cv2.imread(path)
+img = cv2.resize(img, (150, 150), interpolation=cv2.INTER_AREA)
+t1 = time.time()
+vec = fe.Hog(img)
+t2 = time.time()
+print("时间 %f" % (t2-t1))
+# print(len(vec))
+print(vec)
