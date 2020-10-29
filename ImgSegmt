@@ -1,0 +1,12 @@
+from skimage.segmentation import slic,mark_boundaries
+import cv2
+
+'''
+https://blog.csdn.net/weixin_41819299/article/details/84641465
+'''
+path = r'D:\coal-gangue\raw\17.jpg'
+img = cv2.imread(path)
+segments = slic(img, n_segments=30, compactness=7,enforce_connectivity=True)
+out=mark_boundaries(img,segments)
+cv2.imshow("Segment",out)
+cv2.waitKey(0)
