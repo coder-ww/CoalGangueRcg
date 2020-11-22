@@ -4,7 +4,7 @@ from openpyxl import load_workbook
 
 #重命名文件夹中的文件
 def rename():
-    path = 'D:\\coal-gangue\\selected\\gangue'
+    path = r'D:\20201103\20191218-01\pic\coal'
     cnt = 0
     filelist = os.listdir(path)  # 该文件夹下所有的文件（包括文件夹）
     for files in filelist:  # 遍历所有文件

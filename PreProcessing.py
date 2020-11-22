@@ -1,7 +1,4 @@
-import numpy as np
 import cv2
-import matplotlib.pyplot as plt
-from scipy import ndimage
 
 def Gamma(img):#伽马矫正
     s = img.shape
@@ -16,9 +13,15 @@ def HistEqual(img):#分区域直方图均衡化，用于图像增强
     cl = clash.apply(img)
     return cl
 
-def prep(img):
-    cv2.GaussianBlur(img,(5,5),0)
-    #cv2.Laplacian(img,cv2.CV_64F,ksize = 5)
-    cl = HistEqual(img)
-    sobelY = cv2.Scharr(img,cv2.CV_64F,0,1)
+# 调整顺序，寻求最优方案
+def Prep(img):
+    # 高斯降噪
+    img = cv2.GaussianBlur(img,(3,3),0)
+    # 拉普拉斯增强
+    img = cv2.Laplacian(img,-1,ksize = 3)
+    # 分区域直方图均衡化
+    img = HistEqual(img)
+    # 开运算
+    g = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+    img = cv2.morphologyEx(img, cv2.MORPH_OPEN, g)
     return img
