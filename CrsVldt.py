@@ -8,17 +8,7 @@ import FeatExtraction as fe
 import SupVecMech as mysvm
 
 
-# 简单画个图
-def Visualize(num):  # 可以尝试在柱状图上带数据
-    x = range(10)
-    plt.xlim(-1, 10)
-    plt.ylim(0.5, 1)
-    plt.xticks(range(10), np.linspace(0, 10, 10, dtype=int))
-    plt.ylabel("Precision")
-    plt.xlabel("Group No.")
-    plt.title("Precision of Cross-Validation")
-    plt.bar(x, num)
-    plt.show()
+
 
 
 # 生成训练、测试数据集
