@@ -1,11 +1,8 @@
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 from itertools import chain
-import PreProcessing as pp
 
 np.set_printoptions(threshold=np.inf)
-
 
 def Hog(img):
     # 这五个参数比较常用，其余的可以自己设置
@@ -16,7 +13,6 @@ def Hog(img):
     nbins = 9
 
     hog = cv2.HOGDescriptor(winSize, blockSize, blockStride, cellSize, nbins)
-    # img = pp.Gamma(img)
     tmp = hog.compute(img)
     vec = list(chain.from_iterable(tmp))
     return vec
@@ -25,8 +21,9 @@ def Hog(img):
 # LBP圆形特征，具有旋转不变性
 def Rotation_invariant_LBP(img, radius=3, neighbors=8):
     h, w = img.shape
-    img = img[int(h/4):int(3*h/4), int(w/4):int(3*w/4)]
-    h, w = img.shape
+    # 做切片，意图用中间特征代表图像特征
+    # img = img[int(h/4):int(3*h/4), int(w/4):int(3*w/4)]
+    # h, w = img.shape
     dst = np.zeros((h - 2 * radius, w - 2 * radius), dtype=img.dtype)
     for k in range(neighbors):
         # 计算采样点对于中心点坐标的偏移量rx，ry
@@ -66,7 +63,7 @@ def Rotation_invariant_LBP(img, radius=3, neighbors=8):
     #                 minValue = tmp
     #         dst[i, j] = minValue
     hist, bins = np.histogram(dst, 256, range=(0, 256))
-    #计算概率归一化的直方图特征
+    # 计算概率归一化的直方图特征
     for item in hist:
         item = item/hist.size
 
