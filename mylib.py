@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from openpyxl import load_workbook
 
-def GenCandidate(num_c, num_g, num):
+def GenCandidate(num, num_c = 840, num_g = 393):
     cand_c = []
     cand_g = []
     while len(cand_c) < num:
