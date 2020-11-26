@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from openpyxl import load_workbook
 
-def GenCandidate(num, num_c = 840, num_g = 393):
+def GenCandidate(num, num_c = 839, num_g = 392):
     cand_c = []
     cand_g = []
     while len(cand_c) < num:
@@ -59,7 +59,7 @@ def Filter():
     for i in range(457):
         tmp = str(i) + ".jpg"
         if tmp not in filelist:
-            record("selected",(i,"coal"))
+            Record("selected",(i,"coal"))
 
 # filter()
 # rename()

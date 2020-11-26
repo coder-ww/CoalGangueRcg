@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import time
 from itertools import chain
 import mylib
 import PreProcessing as pp
@@ -72,30 +73,36 @@ def Rotation_invariant_LBP(img, radius=3, neighbors=8):
     return hist
 
 
-def GenFeatSet():
+def GenFeatSet(num):
     coal_prefix = 'D:\\20201103\\20191218-01\\pic\\coal\\'
     gangue_prefix = 'D:\\20201103\\20191218-01\\pic\\gangue\\'
     suffix = '.jpg'
 
     train = []
     label = []
+    tt = []
 
-    num = 390
     cand_c, cand_g = mylib.GenCandidate(num)
     for index in cand_c:
         path = coal_prefix + str(index) + suffix
         img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
         # 这里使用了区域关系重采样做插值
-        img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_AREA)
-        img = pp.Prep(img)
+        t0 = time.time()
+        img = cv2.resize(img, (300, 300), interpolation=cv2.INTER_AREA)
+        # img = pp.Prep(img)
         train.append(Hog(img))
         label.append("coal")
+        t1 = time.time()
+        tt.append(t1-t0)
     for index in cand_g:
         path = gangue_prefix + str(index) + suffix
         img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
         # 这里使用了区域关系重采样做插值
-        img = cv2.resize(img, (500, 500), interpolation=cv2.INTER_AREA)
-        img = pp.Prep(img)
+        t0 = time.time()
+        img = cv2.resize(img, (300, 300), interpolation=cv2.INTER_AREA)
+        # img = pp.Prep(img)
         train.append(Hog(img))
         label.append("gangue")
-    return train, label
+        t1 = time.time()
+        tt.append(t1-t0)
+    return train, label, cand_c+cand_g, tt
