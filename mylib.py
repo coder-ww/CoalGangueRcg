@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from openpyxl import load_workbook
 
+# 随机生成两组备选图片编号
 def GenCandidate(num, num_c = 839, num_g = 392):
     cand_c = []
     cand_g = []
