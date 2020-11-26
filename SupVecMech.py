@@ -1,8 +1,5 @@
 import numpy as np
-import cv2
 from sklearn import svm
-import FeatExtraction as fe
-import pickle
 
 np.set_printoptions(threshold=np.inf)
 
@@ -12,5 +9,5 @@ def Train(train,label):
     #保存模型
     #with open(r'C:\Users\wei\source\repos\coal-gangue\clf_default.pickle','wb') as f_o:
     #    pickle.dump(clf,f)
-    print("模型训练完成！")
+    print("模型训练完成")
     return clf
