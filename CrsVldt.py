@@ -36,6 +36,7 @@ def CrossVld(iteration):
     print("识别石块总个数 %d" % (2*num))
     precision = []
     recall = []
+    accuracy = []
     train, label, pos, time = fe.GenFeatSet(num)
     print("特征计算完成")
     for i in range(iteration):
@@ -54,13 +55,9 @@ def CrossVld(iteration):
         clf = mysvm.Train(np.asarray(tmp_t), np.asarray(tmp_l))
         tp, fp, tn, fn = CalcIndicator(clf, train, testset)
         print("指标计算完成")
+        accuracy.append((tp+tn)/(2*num))
         precision.append(tp/(tp+fp))
         recall.append(tp/(tp+fn))
     del train, tmp_t, tmp_l, label, pos, time, testset
     gc.collect()
-    return precision, recall
-
-precision, recall = CrossVld(10)
-print(precision)
-print("上面是准确率，下面是召回率")
-print(recall)
+    return accuracy, precision, recall
