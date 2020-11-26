@@ -60,3 +60,5 @@ def CrossVld(iteration, num = 390):
     del train, tmp_t, tmp_l, label, pos, time, testset
     gc.collect()
     return accuracy, precision, recall
+
+# 建议是在这个文件里面做实验
