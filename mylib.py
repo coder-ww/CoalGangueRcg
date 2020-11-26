@@ -60,6 +60,3 @@ def Filter():
         tmp = str(i) + ".jpg"
         if tmp not in filelist:
             Record("selected",(i,"coal"))
-
-# filter()
-# rename()
