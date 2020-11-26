@@ -18,14 +18,13 @@ def GenCandidate(num, num_c = 839, num_g = 392):
     return cand_c, cand_g
 
 # 结果可视化
-def Visualize(num, groups, index):  # 可以尝试在柱状图上带数据
+def Visualize(num, groups):  # 可以尝试在柱状图上带数据
     x = range(groups)
     plt.xlim(-1, groups)
     plt.ylim(0.5, 1)
     plt.xticks(range(10), np.linspace(0, groups, groups, dtype=int))
-    plt.ylabel(index)
     plt.xlabel("Group No.")
-    plt.title("%s of Cross-Validation" % index)
+    plt.title("Cross-Validation")
     plt.bar(x, num)
     plt.show()
 

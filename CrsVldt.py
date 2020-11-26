@@ -31,8 +31,7 @@ def CalcIndicator(clf, featset, testset):
     return tp, fp, tn, fn
 
 # 交叉检验代码
-def CrossVld(iteration):
-    num = 390
+def CrossVld(iteration, num = 390):
     print("识别石块总个数 %d" % (2*num))
     precision = []
     recall = []
