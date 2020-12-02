@@ -23,7 +23,7 @@ def Visualize(num, groups):  # 可以尝试在柱状图上带数据
     x = range(groups)
     plt.xlim(-1, groups)
     plt.ylim(0.5, 1)
-    plt.xticks(range(10), np.linspace(0, groups, groups, dtype=int))
+    plt.xticks(range(groups), np.linspace(0, groups, groups, dtype=int))
     plt.xlabel("Group No.")
     plt.title("Cross-Validation")
     plt.bar(x, num)

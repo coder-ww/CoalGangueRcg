@@ -54,7 +54,7 @@ def CrossVld(iteration, num = 390):
         clf = mysvm.Train(np.asarray(tmp_t), np.asarray(tmp_l))
         tp, fp, tn, fn = CalcIndicator(clf, train, testset)
         print("指标计算完成")
-        accuracy.append((tp+tn)/(2*num))
+        accuracy.append((tp+tn)/len(testset))
         precision.append(tp/(tp+fp))
         recall.append(tp/(tp+fn))
     del train, tmp_t, tmp_l, label, pos, time, testset
@@ -62,3 +62,11 @@ def CrossVld(iteration, num = 390):
     return accuracy, precision, recall
 
 # 建议是在这个文件里面做实验
+times = 10
+acc, pre, rec = CrossVld(times)
+mylib.Visualize(acc, times)
+mylib.Visualize(pre, times)
+mylib.Visualize(rec, times)
+print(acc)
+print(pre)
+print(rec)
