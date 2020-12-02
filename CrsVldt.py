@@ -16,13 +16,13 @@ def CalcIndicator(clf, featset, testset):
                 tp += 1
                 flag = True
             else:
-                tn += 1
+                fn += 1
         else:
             if clf.predict([featset[tmp[0]]]) == tmp[2]:
-                fp += 1
+                tn += 1
                 flag = True
             else:
-                fn += 1
+                fp += 1
         t1 = time.time()
         tmp[3] += t1 - t0
         tmp.append(flag)
